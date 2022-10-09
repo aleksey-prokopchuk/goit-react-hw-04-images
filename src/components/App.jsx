@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     const fetchImage = async () => {
       setLoading(true);
-      
+
       try {
         const data = await searchImage(search, page);
         setItems((prevItems) => {
@@ -39,14 +39,12 @@ function App() {
     };
   }, [search, page]);
 
-
-
-  const onSearch = ({ search }) => {
+  const onSearch = (search) => {
     setSearch(search);
   };
 
   const openModal = (modalContent) => {
-      const {largeImageURL, tags} = modalContent
+    const { largeImageURL, tags } = modalContent
     setModalOpen(true);
     setLargeImageURL(largeImageURL);
     setTags(tags);
@@ -59,21 +57,21 @@ function App() {
   };
 
   const loadMore = () => {
-    setPage((prevPage) => prevPage + 1 )
+    setPage((prevPage) => prevPage + 1)
   };
 
   return (
-      <div className={app}>
-        <Searchbar onSubmit={onSearch} />
-        {modalOpen && <Modal items={items} onClose={closeModal}>
-          <img src={largeImageURL} alt={tags} />
-        </Modal>}
-        {!!items.length && <ImageGallery items={items} onClick={openModal} />}
-        {loading && <Loader />}
-        {error && <p>Something went wrong !</p>}
-        {!!items.length && < Button onClick={loadMore} title='Load more' />}
-      </div>
-    );
+    <div className={app}>
+      <Searchbar onSubmit={onSearch} />
+      {modalOpen && <Modal items={items} onClose={closeModal}>
+        <img src={largeImageURL} alt={tags} />
+      </Modal>}
+      {!!items.length && <ImageGallery items={items} onClick={openModal} />}
+      {loading && <Loader />}
+      {error && <p>Something went wrong !</p>}
+      {!!items.length && < Button onClick={loadMore} title='Load more' />}
+    </div>
+  );
 };
 
 export default App;
